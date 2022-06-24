@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "codepipeline-artifacts" {
-  bucket = "aws-cicd-pipeline-artifacts"
+  bucket        = "aws-cicd-pipeline-artifacts"
   force_destroy = true
 }
 

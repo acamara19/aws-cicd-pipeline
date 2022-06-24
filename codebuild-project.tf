@@ -1,7 +1,6 @@
-resource "aws_codebuild_project" "cicd-pipeline-project" {
-  name          = "cicd-pipeline-project"
-  description   = "cicd_codebuild_project"
-  service_role  = aws_iam_role.cicd-codebuild-role.arn
+resource "aws_codebuild_project" "cicd-codebuild-project" {
+  name         = "cicd-codebuild-project"
+  service_role = aws_iam_role.cicd-codebuild-role.arn
 
   artifacts {
     type = "CODEPIPELINE"
