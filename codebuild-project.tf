@@ -13,6 +13,11 @@ resource "aws_codebuild_project" "cicd-codebuild-project" {
     image_pull_credentials_type = "CODEBUILD"
 
     environment_variable {
+      name  = "REPOSITORY_URI"
+      value = aws_ecr_repository.cicd-pipeline-ecr-repo.repository_url
+    }
+
+    environment_variable {
       name  = "AWS_DEFAULT_REGION"
       value = "us-east-1"
     }
@@ -40,12 +45,7 @@ resource "aws_codebuild_project" "cicd-codebuild-project" {
   }
 
   source {
-    type            = "CODEPIPELINE"
-    location        = "https://github.com/acamara19/aws-cicd-pipeline-project.git"
-    git_clone_depth = 1
-
-    git_submodules_config {
-      fetch_submodules = true
-    }
+    type      = "CODEPIPELINE"
+    buildspec = file("buildspec.yml")
   }
 }
